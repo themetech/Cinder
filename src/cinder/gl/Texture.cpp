@@ -61,6 +61,8 @@ class ImageTargetGlTexture : public ImageTarget {
 	
 	virtual bool	hasAlpha() const { return mHasAlpha; }
 	virtual void*	getRowPointer( int32_t row );
+	virtual int32_t	getRowBytes() const override { return mRowInc; }
+	virtual bool	isTopDown() const override { return mTexture ? mTexture->isTopDown() : false; }
 	
 	void*			getData() const { return mDataBaseAddress; }
 	

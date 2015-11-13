@@ -233,10 +233,16 @@ void ImageSourceFileWic::load( ImageTargetRef target )
 	else
 		mFrame->CopyPixels( NULL, (UINT)mRowBytes, mRowBytes * mHeight, data.get() );
 	
-	const uint8_t *dataPtr = data.get();
-	for( int32_t row = 0; row < mHeight; ++row ) {
-		((*this).*func)( target, row, dataPtr );
-		dataPtr += mRowBytes;
+	if( target->getRowBytes() != mRowBytes || target->getDataType() != mDataType || !target->isTopDown() ) 
+	{
+		const uint8_t *dataPtr = data.get();
+		for( int32_t row = 0; row < mHeight; ++row ) {
+			((*this).*func)( target, row, dataPtr );
+			dataPtr += mRowBytes;
+		}
+	}
+	else {
+		memcpy( target->getRowPointer(0), (void*)data.get(), mRowBytes * mHeight );
 	}
 }
 

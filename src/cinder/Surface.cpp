@@ -56,6 +56,7 @@ class ImageTargetSurface : public ImageTarget {
 	virtual bool hasAlpha() const;
 	
 	virtual void*	getRowPointer( int32_t row );
+	virtual int32_t	getRowBytes() const override { return mSurface ? mSurface->getRowBytes() : 0; }
 	
   protected:
 	ImageTargetSurface( SurfaceT<T> *surface );

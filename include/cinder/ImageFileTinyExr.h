@@ -54,6 +54,7 @@ class ImageTargetFileTinyExr : public ImageTarget {
 	static ImageTargetRef		create( DataTargetRef dataTarget, ImageSourceRef imageSource, ImageTarget::Options options, const std::string &extensionData );
 
 	void*	getRowPointer( int32_t row ) override;
+	int32_t	getRowBytes() const override { return 0; /* TODO */ }
 	void	finalize() override;
 	
 	static void		registerSelf();

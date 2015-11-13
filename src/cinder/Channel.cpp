@@ -38,6 +38,7 @@ class ImageTargetChannel : public ImageTarget {
 	virtual bool hasAlpha() const { return false; }
 	
 	virtual void*	getRowPointer( int32_t row ) { return reinterpret_cast<void*>( mChannel->getData( ivec2( 0, row ) ) ); }
+	virtual int32_t	getRowBytes() const override { return mChannel ? mChannel->getRowBytes() : 0; }
 	
   protected:
 	ImageTargetChannel( ChannelT<T> *channel )

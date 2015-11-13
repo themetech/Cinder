@@ -83,6 +83,7 @@ class ImageTargetCvPixelBuffer : public cinder::ImageTarget {
 	~ImageTargetCvPixelBuffer();
 
 	virtual void*		getRowPointer( int32_t row );
+	virtual int32_t		getRowBytes() const override { return mRowBytes; }
 	virtual void		finalize();
 
 	::CVPixelBufferRef	getCvPixelBuffer() const { return mPixelBufferRef; }
@@ -94,7 +95,7 @@ class ImageTargetCvPixelBuffer : public cinder::ImageTarget {
 	void		convertDataToAYpCbCr();
 
 	::CVPixelBufferRef	mPixelBufferRef;
-	size_t				mRowBytes;
+	int32_t				mRowBytes;
 	uint8_t				*mData;
 	bool				mConvertToYpCbCr;
 };
@@ -110,6 +111,7 @@ class ImageTargetGWorld : public cinder::ImageTarget {
 	static ImageTargetGWorldRef createRef( ImageSourceRef imageSource );
 
 	virtual void*		getRowPointer( int32_t row );
+	virtual int32_t		getRowBytes() const override { return mRowBytes; }
 	virtual void		finalize();
 
 	::GWorldPtr			getGWorld() const { return mGWorld; }
@@ -119,7 +121,7 @@ class ImageTargetGWorld : public cinder::ImageTarget {
 	
 	::GWorldPtr			mGWorld;
 	::PixMapHandle		mPixMap;
-	size_t				mRowBytes;
+	int32_t				mRowBytes;
 	uint8_t				*mData;
 };
 

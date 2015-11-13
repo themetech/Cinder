@@ -159,8 +159,10 @@ class ImageTarget : public ImageIo {
 	virtual ~ImageTarget() {};
 
 	virtual void*	getRowPointer( int32_t row ) = 0;
+	virtual int32_t	getRowBytes() const = 0;
 	virtual void	setRow( int32_t row, const void *data ) { throw; }
 	virtual void	finalize() { }
+	virtual bool	isTopDown() const { return false; }
 	
 	class Options {
 	  public:
