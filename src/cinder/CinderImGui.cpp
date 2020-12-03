@@ -350,6 +350,7 @@ namespace ImGui {
 static void ImGui_ImplCinder_MouseDown( ci::app::MouseEvent& event )
 {
 	ImGuiIO& io = ImGui::GetIO();
+	if (io.IsRemoteOnlyMode)return;
 	io.MousePos = ci::app::toPixels( event.getPos() );
 	io.MouseDown[0] = event.isLeftDown();
 	io.MouseDown[1] = event.isRightDown();
@@ -359,6 +360,7 @@ static void ImGui_ImplCinder_MouseDown( ci::app::MouseEvent& event )
 static void ImGui_ImplCinder_MouseUp( ci::app::MouseEvent& event )
 {
 	ImGuiIO& io = ImGui::GetIO();
+	if (io.IsRemoteOnlyMode)return;
 	io.MouseDown[0] = false;
 	io.MouseDown[1] = false;
 	io.MouseDown[2] = false;
@@ -373,6 +375,7 @@ static void ImGui_ImplCinder_MouseWheel( ci::app::MouseEvent& event )
 static void ImGui_ImplCinder_MouseMove( ci::app::MouseEvent& event )
 {
 	ImGuiIO& io = ImGui::GetIO();
+	if (io.IsRemoteOnlyMode)return;
 	io.MousePos = ci::app::toPixels( event.getPos() );
 	event.setHandled( io.WantCaptureMouse );
 }
@@ -380,6 +383,7 @@ static void ImGui_ImplCinder_MouseMove( ci::app::MouseEvent& event )
 static void ImGui_ImplCinder_MouseDrag( ci::app::MouseEvent& event )
 {
 	ImGuiIO& io = ImGui::GetIO();
+	if (io.IsRemoteOnlyMode)return;
 	io.MousePos = ci::app::toPixels( event.getPos() );
 	event.setHandled( io.WantCaptureMouse );
 }
@@ -387,7 +391,7 @@ static void ImGui_ImplCinder_MouseDrag( ci::app::MouseEvent& event )
 static void ImGui_ImplCinder_KeyDown( ci::app::KeyEvent& event )
 {
 	ImGuiIO& io = ImGui::GetIO();
-
+	if (io.IsRemoteOnlyMode)return;
 #if defined CINDER_LINUX
 	auto character = event.getChar();
 #else
