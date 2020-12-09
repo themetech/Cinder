@@ -421,7 +421,7 @@ static void ImGui_ImplCinder_KeyDown( ci::app::KeyEvent& event )
 static void ImGui_ImplCinder_KeyUp( ci::app::KeyEvent& event )
 {
 	ImGuiIO& io = ImGui::GetIO();
-
+	if (io.IsRemoteOnlyMode)return;
 	io.KeysDown[event.getCode()] = false;
 
 	for( auto key : sAccelKeys ) {
